@@ -108,7 +108,8 @@ module.exports = function (graph) {
 						.label(element.label)
 						// .type(element.type) Ignore, because we predefined it
 						.union(element.union)
-						.iri(element.iri);
+						.iri(element.iri)
+						.backgroundColor(element.backgroundColor);
 
 					// Create node objects for all individuals
 					if (element.individuals) {
