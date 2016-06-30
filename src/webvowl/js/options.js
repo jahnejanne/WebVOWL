@@ -15,7 +15,8 @@ module.exports = function () {
 		minMagnification = 0.95,
 		maxMagnification = 4,
 		compactNotation = false,
-		scaleNodesByIndividuals = false;
+		scaleNodesByIndividuals = false,
+		exportWithGraphChanges = true;
 
 
 	options.charge = function (p) {
@@ -111,6 +112,12 @@ module.exports = function () {
 	options.width = function (p) {
 		if (!arguments.length) return width;
 		width = +p;
+		return options;
+	};
+
+	options.exportWithGraphChanges = function (p) {
+		if (!arguments.length) return exportWithGraphChanges;
+		exportWithGraphChanges = p;
 		return options;
 	};
 
