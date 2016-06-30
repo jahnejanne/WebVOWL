@@ -15,7 +15,7 @@ module.exports = function (graph) {
 	 */
 	pauseMenu.setup = function () {
 		pauseButton = d3.select("#pause-button")
-			.datum({paused: false})
+			.datum({paused: true})
 			.on("click", function (d) {
 				graph.paused(!d.paused);
 				d.paused = !d.paused;
@@ -46,9 +46,8 @@ module.exports = function (graph) {
 	}
 
 	pauseMenu.reset = function () {
-		// Simulate resuming
-		pauseButton.datum().paused = false;
-		graph.paused(false);
+		pauseButton.datum().paused = true;
+		graph.paused(true);
 		updatePauseButton();
 	};
 
