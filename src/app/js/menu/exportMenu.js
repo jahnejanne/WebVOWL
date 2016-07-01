@@ -173,7 +173,7 @@ module.exports = function (graph) {
 		}
 		
 		if(graph.options().exportWithGraphChanges()) {
-			exportableJsonText = JSON.stringify(graph.applyGraphChangesToData());
+			exportableJsonText = JSON.stringify(graph.addGraphChanges(JSON.parse(exportableJsonText)));
 		}
 
 		var dataURI = "data:text/json;charset=utf-8," + encodeURIComponent(exportableJsonText);
