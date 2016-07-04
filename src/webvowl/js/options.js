@@ -16,7 +16,8 @@ module.exports = function () {
 		maxMagnification = 4,
 		compactNotation = false,
 		scaleNodesByIndividuals = false,
-		exportWithGraphChanges = true;
+		exportWithGraphChanges = true,
+		cardinalityVisible = true;
 
 
 	options.charge = function (p) {
@@ -118,6 +119,12 @@ module.exports = function () {
 	options.exportWithGraphChanges = function (p) {
 		if (!arguments.length) return exportWithGraphChanges;
 		exportWithGraphChanges = p;
+		return options;
+	};
+
+	options.cardinalityVisible = function (p) {
+		if (!arguments.length) return cardinalityVisible;
+		cardinalityVisible = p;
 		return options;
 	};
 
