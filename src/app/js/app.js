@@ -29,6 +29,10 @@ module.exports = function () {
 		subclassFilter = webvowl.modules.subclassFilter(),
 		setOperatorFilter = webvowl.modules.setOperatorFilter();
 
+	app.overrideOptions = function(overridingOptions) {
+		options.rewriteFrom(overridingOptions);
+	};
+
 	app.initialize = function () {
 		options.graphContainerSelector(GRAPH_SELECTOR);
 		options.selectionModules().push(focuser);
