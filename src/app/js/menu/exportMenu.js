@@ -171,9 +171,12 @@ module.exports = function (graph) {
 			d3.event.preventDefault();
 			return;
 		}
-		
+
+		var exportableWithGraphChanges;
+
 		if(graph.options().exportWithGraphChanges()) {
-			exportableJsonText = JSON.stringify(graph.addGraphChanges(JSON.parse(exportableJsonText)));
+			exportableWithGraphChanges = graph.addGraphChanges(JSON.parse(exportableJsonText));
+			exportableJsonText = JSON.stringify(exportableWithGraphChanges, null, 2);
 		}
 
 		var dataURI = "data:text/json;charset=utf-8," + encodeURIComponent(exportableJsonText);
