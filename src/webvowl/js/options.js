@@ -18,6 +18,7 @@ module.exports = function () {
 		scaleNodesByIndividuals = false,
 		exportWithGraphChanges = true,
 		paused = true,
+		datatypeFilterEnabled = true,
 		cardinalityVisible = true,
 		cardinalityPlacement = "LABEL";
 
@@ -127,6 +128,12 @@ module.exports = function () {
 	options.paused = function (p) {
 		if (!arguments.length) return paused;
 		paused = p;
+		return options;
+	};	
+	
+	options.datatypeFilterEnabled = function (p) {
+		if (!arguments.length) return datatypeFilterEnabled;
+		datatypeFilterEnabled = p;
 		return options;
 	};
 

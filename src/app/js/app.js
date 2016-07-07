@@ -15,26 +15,29 @@ module.exports = function () {
 		resetMenu = require("./menu/resetMenu")(graph),
 		sidebar = require("./sidebar")(graph),
 	// Graph modules
-		colorExternalsSwitch = webvowl.modules.colorExternalsSwitch(graph),
-		compactNotationSwitch = webvowl.modules.compactNotationSwitch(graph),
-		datatypeFilter = webvowl.modules.datatypeFilter(),
-		disjointFilter = webvowl.modules.disjointFilter(),
-		focuser = webvowl.modules.focuser(),
-		nodeDegreeFilter = webvowl.modules.nodeDegreeFilter(filterMenu),
-		nodeScalingSwitch = webvowl.modules.nodeScalingSwitch(graph),
-		objectPropertyFilter = webvowl.modules.objectPropertyFilter(),
-		pickAndPin = webvowl.modules.pickAndPin(),
-		selectionDetailDisplayer = webvowl.modules.selectionDetailsDisplayer(sidebar.updateSelectionInformation),
-		statistics = webvowl.modules.statistics(),
-		subclassFilter = webvowl.modules.subclassFilter(),
-		predefinedLabelFilter = webvowl.modules.predefinedLabelFilter(),
-		setOperatorFilter = webvowl.modules.setOperatorFilter();
+		colorExternalsSwitch,
+		compactNotationSwitch,
+		datatypeFilter,
+		disjointFilter,
+		focuser,
+		nodeDegreeFilter,
+		nodeScalingSwitch,
+		objectPropertyFilter,
+		pickAndPin,
+		selectionDetailDisplayer,
+		statistics,
+		subclassFilter,
+		predefinedLabelFilter,
+		setOperatorFilter;
 
 	app.overrideOptions = function(overridingOptions) {
 		options.rewriteFrom(overridingOptions);
 	};
 
 	app.initialize = function () {
+
+		initializeModules();
+
 		options.graphContainerSelector(GRAPH_SELECTOR);
 		options.selectionModules().push(focuser);
 		options.selectionModules().push(selectionDetailDisplayer);
@@ -65,6 +68,23 @@ module.exports = function () {
 		graph.start();
 		adjustSize();
 	};
+
+	function initializeModules() {
+		colorExternalsSwitch = webvowl.modules.colorExternalsSwitch(graph);
+		compactNotationSwitch = webvowl.modules.compactNotationSwitch(graph);
+		datatypeFilter = webvowl.modules.datatypeFilter(options);
+		disjointFilter = webvowl.modules.disjointFilter();
+		focuser = webvowl.modules.focuser();
+		nodeDegreeFilter = webvowl.modules.nodeDegreeFilter(filterMenu);
+		nodeScalingSwitch = webvowl.modules.nodeScalingSwitch(graph);
+		objectPropertyFilter = webvowl.modules.objectPropertyFilter();
+		pickAndPin = webvowl.modules.pickAndPin();
+		selectionDetailDisplayer = webvowl.modules.selectionDetailsDisplayer(sidebar.updateSelectionInformation);
+		statistics = webvowl.modules.statistics();
+		subclassFilter = webvowl.modules.subclassFilter();
+		predefinedLabelFilter = webvowl.modules.predefinedLabelFilter();
+		setOperatorFilter = webvowl.modules.setOperatorFilter();
+	}
 
 	function loadOntologyFromText(jsonText, filename, alternativeFilename) {
 		pauseMenu.reset();
