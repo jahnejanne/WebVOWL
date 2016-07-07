@@ -27,6 +27,7 @@ module.exports = function () {
 		selectionDetailDisplayer = webvowl.modules.selectionDetailsDisplayer(sidebar.updateSelectionInformation),
 		statistics = webvowl.modules.statistics(),
 		subclassFilter = webvowl.modules.subclassFilter(),
+		predefinedLabelFilter = webvowl.modules.predefinedLabelFilter(),
 		setOperatorFilter = webvowl.modules.setOperatorFilter();
 
 	app.overrideOptions = function(overridingOptions) {
@@ -48,12 +49,13 @@ module.exports = function () {
 		options.filterModules().push(nodeDegreeFilter);
 		options.filterModules().push(compactNotationSwitch);
 		options.filterModules().push(colorExternalsSwitch);
+		options.filterModules().push(predefinedLabelFilter);
 
 		d3.select(window).on("resize", adjustSize);
 
 		exportMenu.setup();
 		gravityMenu.setup();
-		filterMenu.setup(datatypeFilter, objectPropertyFilter, subclassFilter, disjointFilter, setOperatorFilter, nodeDegreeFilter);
+		filterMenu.setup(datatypeFilter, objectPropertyFilter, subclassFilter, disjointFilter, setOperatorFilter, nodeDegreeFilter, predefinedLabelFilter);
 		modeMenu.setup(pickAndPin, nodeScalingSwitch, compactNotationSwitch, colorExternalsSwitch);
 		pauseMenu.setup();
 		sidebar.setup();
