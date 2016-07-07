@@ -17,7 +17,8 @@ module.exports = function () {
 		compactNotation = false,
 		scaleNodesByIndividuals = false,
 		exportWithGraphChanges = true,
-		cardinalityVisible = true;
+		cardinalityVisible = true,
+		cardinalityPlacement = "LABEL";
 
 
 	options.charge = function (p) {
@@ -125,6 +126,12 @@ module.exports = function () {
 	options.cardinalityVisible = function (p) {
 		if (!arguments.length) return cardinalityVisible;
 		cardinalityVisible = p;
+		return options;
+	};
+
+	options.cardinalityPlacement = function (p) {
+		if (!arguments.length) return cardinalityPlacement;
+		cardinalityPlacement = p;
 		return options;
 	};
 
