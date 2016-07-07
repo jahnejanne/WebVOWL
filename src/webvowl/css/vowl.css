@@ -58,6 +58,11 @@ marker path {
     fill: #f00;
     cursor: pointer;
 }
+
+circle.pin {
+    fill: white;
+}
+
 .focused, path.hovered {
 	stroke: #f00;
 }
