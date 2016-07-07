@@ -19,6 +19,7 @@ module.exports = function () {
 		exportWithGraphChanges = true,
 		paused = true,
 		datatypeFilterEnabled = true,
+		objectPropertyFilterEnabled = false,
 		cardinalityVisible = true,
 		cardinalityPlacement = "LABEL";
 
@@ -134,6 +135,12 @@ module.exports = function () {
 	options.datatypeFilterEnabled = function (p) {
 		if (!arguments.length) return datatypeFilterEnabled;
 		datatypeFilterEnabled = p;
+		return options;
+	};
+	
+	options.objectPropertyFilterEnabled = function (p) {
+		if (!arguments.length) return objectPropertyFilterEnabled;
+		objectPropertyFilterEnabled = p;
 		return options;
 	};
 
