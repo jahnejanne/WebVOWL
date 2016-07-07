@@ -17,6 +17,7 @@ module.exports = function () {
 		compactNotation = false,
 		scaleNodesByIndividuals = false,
 		exportWithGraphChanges = true,
+		paused = true,
 		cardinalityVisible = true,
 		cardinalityPlacement = "LABEL";
 
@@ -120,6 +121,12 @@ module.exports = function () {
 	options.exportWithGraphChanges = function (p) {
 		if (!arguments.length) return exportWithGraphChanges;
 		exportWithGraphChanges = p;
+		return options;
+	};
+
+	options.paused = function (p) {
+		if (!arguments.length) return paused;
+		paused = p;
 		return options;
 	};
 
