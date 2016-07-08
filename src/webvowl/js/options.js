@@ -21,7 +21,7 @@ module.exports = function () {
 		datatypeFilterEnabled = true,
 		objectPropertyFilterEnabled = false,
 		cardinalityVisible = true,
-		cardinalityPlacement = "LABEL";
+		cardinalityPlacement = "PROPERTY";
 
 
 	options.charge = function (p) {
