@@ -55,7 +55,7 @@ marker path {
     fill: #fff;
 }
 .class.hovered, .property.hovered, .cardinality.hovered, .cardinality.focused, circle.pin, .filled.hovered, .filled.focused {
-    fill: #f00;
+    fill: #f00 !important;
     cursor: pointer;
 }
 
