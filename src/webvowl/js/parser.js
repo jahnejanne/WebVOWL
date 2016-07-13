@@ -3,7 +3,7 @@ var attributeParser = require("./parsing/attributeParser")();
 var equivalentPropertyMerger = require("./parsing/equivalentPropertyMerger")();
 var nodePrototypeMap = require("./elements/nodes/nodeMap")();
 var propertyPrototypeMap = require("./elements/properties/propertyMap")();
-
+var _ = require("lodash");
 /**
  * Encapsulates the parsing and preparation logic of the input data.
  * @param graph the graph object that will be passed to the elements
@@ -13,6 +13,7 @@ module.exports = function (graph) {
 	var parser = {},
 		nodes,
 		properties,
+		filterTags,
 		classMap,
 		propertyMap;
 
@@ -24,6 +25,7 @@ module.exports = function (graph) {
 		if (!ontologyData) {
 			nodes = [];
 			properties = [];
+			filterTags = [];
 			return;
 		}
 
@@ -49,6 +51,8 @@ module.exports = function (graph) {
 
 		nodes = createNodeStructure(combinedClassesAndDatatypes, classMap);
 		properties = createPropertyStructure(combinedProperties, classMap, propertyMap);
+
+		filterTags = collectTags(classes);
 	};
 
 	/**
@@ -63,6 +67,13 @@ module.exports = function (graph) {
 	 */
 	parser.properties = function () {
 		return properties;
+	};
+
+	/**
+	 * @returns {Array} the preprocessed filterTags
+	 */
+	parser.filterTags = function () {
+		return filterTags;
 	};
 
 	/**
@@ -458,6 +469,32 @@ module.exports = function (graph) {
 		}
 
 		return undefined;
+	}
+
+
+	/**
+	 * Collect all filterTags from classes
+	 */
+
+	function collectTags(classes) {
+		var foundTags = [];
+
+		if(_.isEmpty(classes)) {
+			return foundTags;
+		}
+
+		classes.forEach(function (clazz) {
+			var clazzTags = clazz.tags();
+
+			if(!_.isEmpty(clazzTags)) {
+
+				clazzTags = _.invokeMap(clazzTags, String.prototype.toLowerCase);
+
+				foundTags = _.concat(foundTags, clazzTags);
+			}
+		});
+
+		return _.compact(_.union(foundTags));
 	}
 
 	/**
