@@ -38,7 +38,6 @@ module.exports = function (graphContainerSelector) {
 		links,
 		properties,
 		unfilteredData,
-		filterTags,
 	// Graph behaviour
 		force,
 		dragBehaviour,
@@ -162,14 +161,6 @@ module.exports = function (graphContainerSelector) {
 	 */
 	graph.graphOptions = function () {
 		return options;
-	};
-
-	/**
-	 * Returns the graph options of this graph (readonly).
-	 * @returns {webvowl.options} a graph options object
-	 */
-	graph.filterTags = function () {
-		return filterTags;
 	};
 
 	/**
