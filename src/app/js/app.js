@@ -55,6 +55,7 @@ module.exports = function () {
 		options.filterModules().push(colorExternalsSwitch);
 		options.filterModules().push(tagFilter);
 		options.segmentsModule(segmentsMenu);
+		options.pickAndPinModule(pickAndPin);
 
 		d3.select(window).on("resize", adjustSize);
 

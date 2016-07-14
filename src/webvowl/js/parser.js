@@ -15,13 +15,16 @@ module.exports = function (graph) {
 		properties,
 		filterTags,
 		classMap,
-		propertyMap;
+		propertyMap,
+		pinnedElements;
 
 	/**
 	 * Parses the ontology data and preprocesses it (e.g. connecting inverse properties and so on).
 	 * @param ontologyData the loaded ontology json file
 	 */
 	parser.parse = function (ontologyData) {
+		pinnedElements = [];
+
 		if (!ontologyData) {
 			nodes = [];
 			properties = [];
@@ -77,6 +80,13 @@ module.exports = function (graph) {
 	};
 
 	/**
+	 * @returns {Array} the preprocessed pinnedElements nodes
+	 */
+	parser.pinnedElements = function () {
+		return pinnedElements;
+	};
+
+	/**
 	 * Combines the passed objects with its attributes and prototypes. This also applies
 	 * attributes defined in the base of the prototype.
 	 */
@@ -87,6 +97,7 @@ module.exports = function (graph) {
 		function setDefinedPosition(element, node){
 			if(typeof element.x !== "undefined" && typeof element.y !== "undefined") {
 				node.pinned(true);
+				pinnedElements.push(node);
 				
 				node.x = element.x;
 				node.y = element.y;
