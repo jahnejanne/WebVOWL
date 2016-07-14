@@ -102,6 +102,22 @@ module.exports = function (graphContainerSelector) {
 	 */
 	function zoomed() {
 		graphContainer.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+		fitTextToContainersInCurrentScale(d3.event.scale);
+	}
+
+	/**
+	 * Adjusts the text containers to current scale.
+	 */
+	function fitTextToContainersInCurrentScale(currentScale) {
+		var minimalFittedScale = 0.85;
+		var fittedScale = currentScale < minimalFittedScale?   minimalFittedScale / currentScale : 1;
+
+		[labelContainer, nodeContainer].forEach(function (container) {
+			if (container) {
+				container.selectAll("rect,circle").attr("transform", "scale(" + fittedScale + "," + fittedScale + ")");
+			}
+		});
 	}
 
 	/**
@@ -187,6 +203,7 @@ module.exports = function (graphContainerSelector) {
 		refreshGraphStyle();
 		force.start();
 		redrawContent();
+		fitTextToContainersInCurrentScale(zoom.scale());
 	};
 
 	graph.paused = function (p) {
