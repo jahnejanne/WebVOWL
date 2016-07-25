@@ -16,7 +16,8 @@ module.exports = function (graph) {
 		filterTags,
 		classMap,
 		propertyMap,
-		pinnedElements;
+		pinnedElements,
+		centralizedNode;
 
 	/**
 	 * Parses the ontology data and preprocesses it (e.g. connecting inverse properties and so on).
@@ -24,6 +25,7 @@ module.exports = function (graph) {
 	 */
 	parser.parse = function (ontologyData) {
 		pinnedElements = [];
+		centralizedNode = null;
 
 		if (!ontologyData) {
 			nodes = [];
@@ -86,6 +88,13 @@ module.exports = function (graph) {
 		return pinnedElements;
 	};
 
+	/**
+	 * @returns {Array} the preprocessed center node
+	 */
+	parser.centralizedNode = function () {
+		return centralizedNode;
+	};
+
 	function pinNode(node) {
 		node.pinned(true);
 		pinnedElements.push(node);
@@ -104,13 +113,6 @@ module.exports = function (graph) {
 
 			node.x = x;
 			node.y = y;
-		}
-
-		function setOnCenter(node) {
-			pinNode(node);
-
-			node.x = graph.options().width() / 2;
-			node.y = graph.options().height() / 2;
 		}
 
 		if (baseObjects) {
@@ -157,7 +159,7 @@ module.exports = function (graph) {
 					}
 
 					if(element.center) {
-						setOnCenter(node);
+						centralizedNode = node;
 					}
 
 					// Create node objects for all individuals
